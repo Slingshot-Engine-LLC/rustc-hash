@@ -15,4 +15,5 @@ std = []
 rand = ["dep:rand", "std"]
 
 [dependencies]
+hashbrown = "0.15.0"
 rand = { version = "0.8", optional = true }

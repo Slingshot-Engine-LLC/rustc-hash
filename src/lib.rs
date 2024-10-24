@@ -25,6 +25,8 @@ extern crate rand;
 #[cfg(feature = "rand")]
 mod random_state;
 
+//mod hash_map;
+
 mod seeded_state;
 
 use core::convert::TryInto;
@@ -35,9 +37,17 @@ use core::ops::BitXor;
 #[cfg(feature = "std")]
 use std::collections::{HashMap, HashSet};
 
+//use crate::hash_map::HashMap;
+
 /// Type alias for a hash map that uses the Fx hashing algorithm.
 #[cfg(feature = "std")]
 pub type FxHashMap<K, V> = HashMap<K, V, FxBuildHasher>;
+
+#[cfg(feature = "std")]
+unsafe impl<K: Send, V: Send> Send for FxHashMap<K, V> {}
+
+#[cfg(feature = "std")]
+unsafe impl<K: Send, V: Send> Sync for FxHashMap<K, V> {}
 
 /// Type alias for a hash set that uses the Fx hashing algorithm.
 #[cfg(feature = "std")]
